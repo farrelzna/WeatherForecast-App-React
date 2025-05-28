@@ -1,0 +1,156 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@300;400;700&display=swap');
+
+html,
+body {
+  padding: 0;
+  background: #2d313a;
+  height: 100vh;
+  margin: 0;
+  overflow: hidden;
+  font-family: 'Kumbh Sans', sans-serif;
+  user-select: none;
+}
+
+input {
+  font-family: inherit;
+}
+
+a {
+  text-decoration: none;
+}
+
+.scroll-container {
+  scrollbar-width: none;
+  min-height: 150px;
+}
+
+.scroll-container::-webkit-scrollbar {
+  display: none;
+}
+
+.glass-panel {
+  transition: all 0.3s ease;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+@media (max-width: 640px) {
+  .scroll-container {
+    padding-bottom: 12px;
+  }
+}
+
+a:focus,
+input:focus,
+button:focus {
+  outline: none;
+}
+
+
+.main-container {
+  background-color: rgba(0, 0, 0, 0.55);
+  background-size: cover;
+  background-position: center;
+  background-blend-mode: overlay;
+}
+
+.main-container.night {
+  background-color: rgba(0, 0, 0, 0.75);
+}
+
+.main-container {
+  height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+.main-container .loading {
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  height: 100%;
+}
+
+.main-container:not(.drawer-open) .right {
+  grid-template-columns: 1fr 420px;
+  display: none;
+}
+
+.main-container.drawer-open {
+  grid-template-columns: 1fr 420px;
+}
+
+.main-container.drawer-open .right {
+  display: block;
+}
+
+.left {
+  padding: 4rem;
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+}
+
+.left::-webkit-scrollbar {
+  display: none;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.right {
+  position: relative;
+  overflow: hidden;
+}
+
+@media screen and (max-width:600px) {
+  .main-container.drawer-open {
+    grid-template-columns: 1fr;
+  }
+
+  .left {
+    padding: 4rem 2rem;
+  }
+
+  .main-container.drawer-open .left {
+    display: none;
+  }
+}
+
+.grabber {
+  height: 50px;
+  position: absolute;
+  right: 0;
+  width: 50px;
+  background: url('./assets/icons/search.png') no-repeat center;
+  background-size: 20px;
+  top: 0;
+  border-radius: 4px;
+  /* margin: 30px; */
+  cursor: pointer;
+}
+
+
+.grabber:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+
+.footer {
+  padding: 2rem 0;
+  color: rgba(255, 255, 255, 0.25);
+  font-weight: 300;
+  font-size: 13px;
+}
+
+.footer a {
+  color: inherit;
+  border-bottom: 1px dotted rgba(255, 255, 255, 0.25);
+  text-transform: capitalize;
+  transition: all .2s ease-in;
+}
+
+.footer a:hover {
+  color: rgba(255, 255, 255, 0.8);
+  border-bottom-style: solid;
+}
