@@ -92,10 +92,16 @@ button:focus {
   overflow: auto;
 }
 
+.force-scrollbar-hide::-webkit-scrollbar,
 .left::-webkit-scrollbar {
   display: none;
   -ms-overflow-style: none;
   scrollbar-width: none;
+}
+
+.force-scrollbar-hide {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
 }
 
 .right {

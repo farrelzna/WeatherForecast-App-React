@@ -21,13 +21,13 @@ const WeeklyUpdates = ({ data }) => {
   return (
     upcomingDays.length > 0 && (
       <motion.div 
-        className="p-5 rounded-xl backdrop-blur-md bg-black/20 border-t border-l border-white/5 shadow-xl"
+        className="p-5 rounded-xl backdrop-blur-md bg-black/20 shadow-xl"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
       >
         <div className="flex items-center justify-between mb-4">
-          <h3 className="text-white text-lg font-light tracking-wide">
+          <h3 className="text-white text-xs font-light tracking-wide">
             <span className="text-white/60 text-xs uppercase tracking-widest block mb-1">Weekly Outlook</span>
             7-Day Forecast
           </h3>

@@ -8,15 +8,14 @@ import DataService from '../api/dataService';
 import pinIcon from '../assets/icons/pin.png';
 import dropIcon from '../assets/icons/drop.png';
 import windIcon from '../assets/icons/wind.png';
-import tempIcon from '../assets/icons/temperature.png';
+
 import sunriseIcon from '../assets/icons/sunrise.png';
 import sunsetIcon from '../assets/icons/sunset.png';
 import visibilityIcon from '../assets/icons/visibility.png';
 import barometerIcon from '../assets/icons/barometer.png';
-import cloudsIcon from '../assets/icons/clouds.png';
 import rainIcon from '../assets/icons/rain.png';
 
-const CurrentUpdate = ({ data, dailydata, timings, miniview, name }) => {
+const CurrentUpdate = ({ data, dailydata, timings, name }) => {
   const [tempUnit] = useState('°c');
   const [windSpeedUnit] = useState('mt/s');
   const [windDirection, setWindDirection] = useState(null);
@@ -59,14 +58,14 @@ const CurrentUpdate = ({ data, dailydata, timings, miniview, name }) => {
 
   return (
     <motion.div
-      className="w-full grid grid-cols-1 lg:grid-cols-12 gap-4"
+      className="w-full grid grid-cols-1 lg:grid-cols-12 mt-15 gap-4"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5 }}
     >
       {/* Main Weather Card - Left Column */}
       <motion.div
-        className="glass-panel p-6 rounded-xl flex flex-col justify-between lg:col-span-5 shadow-xl backdrop-blur-md bg-white/5"
+        className="glass-panel p-6 rounded-xl flex flex-col justify-between lg:col-span-5 shadow-xl backdrop-blur-md bg-black/20"
         initial={{ y: -20, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ delay: 0.1, duration: 0.5 }}
@@ -82,7 +81,7 @@ const CurrentUpdate = ({ data, dailydata, timings, miniview, name }) => {
               transition={{ delay: 0.2 }}
             >
               <Icon iconUrl={pinIcon} alt="Location Pin" size={18} />
-              <span className="text-lg font-light tracking-wider text-white/90">{name}</span>
+              <span className="text-sm font-light tracking-wider text-white/90">{name}</span>
             </motion.div>
 
             <motion.div
@@ -105,7 +104,7 @@ const CurrentUpdate = ({ data, dailydata, timings, miniview, name }) => {
             </motion.div>
 
             <motion.div
-              className="mt-1 text-sm text-white/60 font-extralight"
+              className="mt-1 text-xs text-white/60 font-extralight"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.5 }}
@@ -156,13 +155,13 @@ const CurrentUpdate = ({ data, dailydata, timings, miniview, name }) => {
 
       {/* Info Panel - Middle Column */}
       <motion.div
-        className="glass-panel p-5 rounded-xl flex flex-col lg:col-span-4 shadow-xl backdrop-blur-md bg-white/5"
+        className="glass-panel p-5 rounded-xl flex flex-col lg:col-span-4 shadow-xl backdrop-blur-md bg-black/20"
         initial={{ x: 50, opacity: 0 }}
         animate={{ x: 0, opacity: 1 }}
         transition={{ delay: 0.2, duration: 0.5 }}
         whileHover={{ scale: 1.005 }}
       >
-        <h3 className="text-sm uppercase tracking-widest text-white/60 mb-3 font-light">Weather Details</h3>
+        <h3 className="text-xs uppercase tracking-widest text-white/60 mb-3 font-light">Weather Details</h3>
         <div className="grid grid-cols-1 gap-3">
           {[
             { icon: dropIcon, label: 'Humidity', value: `${data.humidity}%` },
@@ -190,8 +189,8 @@ const CurrentUpdate = ({ data, dailydata, timings, miniview, name }) => {
             >
               <Icon iconUrl={item.icon} alt={item.label} size={20} />
               <div className="flex justify-between w-full">
-                <div className="text-sm font-light text-white/70">{item.label}</div>
-                <div className="text-sm text-white font-light">{item.value}</div>
+                <div className="text-xs font-light text-white/70">{item.label}</div>
+                <div className="text-xs text-white font-light">{item.value}</div>
               </div>
             </motion.div>
           ))}
@@ -200,14 +199,14 @@ const CurrentUpdate = ({ data, dailydata, timings, miniview, name }) => {
 
       {/* Fun Fact Card - Right Column */}
       <motion.div
-        className="glass-panel p-5 rounded-xl flex flex-col justify-between lg:col-span-3 shadow-xl backdrop-blur-md bg-white/5"
+        className="glass-panel p-5 rounded-xl flex flex-col justify-between lg:col-span-3 shadow-xl backdrop-blur-md bg-black/20"
         initial={{ y: 20, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ delay: 0.3, duration: 0.5 }}
         whileHover={{ scale: 1.005 }}
       >
         <div>
-          <h3 className="text-sm uppercase tracking-widest text-white/60 mb-3 font-light">Weather Insight</h3>
+          <h3 className="text-xs uppercase tracking-widest text-white/60 mb-3 font-light">Weather Insight</h3>
           <motion.div
             className="p-4 rounded-lg bg-gradient-to-br from-white/5 to-white/10 text-white/80 shadow-inner"
             initial={{ opacity: 0 }}
@@ -215,7 +214,7 @@ const CurrentUpdate = ({ data, dailydata, timings, miniview, name }) => {
             transition={{ delay: 0.4 }}
           >
             <p className="text-xs uppercase tracking-widest text-white/50 mb-2">Did you know?</p>
-            <p className="text-sm font-light">{randomFact}</p>
+            <p className="text-xs font-light">{randomFact}</p>
           </motion.div>
         </div>
         <div className="mt-auto pt-4 text-right text-white/40 text-xs font-light">

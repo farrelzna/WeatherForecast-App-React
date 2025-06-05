@@ -39,7 +39,7 @@ const HourlyUpdates = ({ data, timings }) => {
 
   return (
     <motion.div 
-      className="relative p-5 rounded-xl my-5 bg-black/20 backdrop-blur-md shadow-xl border-t border-l border-white/5"
+      className="relative p-5 rounded-xl my-5 bg-black/20 backdrop-blur-md shadow-xl"
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6 }}
@@ -63,7 +63,7 @@ const HourlyUpdates = ({ data, timings }) => {
       </div>
 
       <div className="relative flex items-center justify-between mb-5">
-        <h3 className="text-white text-lg font-light tracking-wide">
+        <h3 className="text-white text-sm font-light tracking-wide">
           <span className="text-white/60 text-xs uppercase tracking-widest block mb-1">48-Hour Forecast</span>
           Hourly Weather
         </h3>
@@ -86,7 +86,7 @@ const HourlyUpdates = ({ data, timings }) => {
         />
       </div>
 
-      <div className="relative flex overflow-x-auto pb-2 -mx-2 scrollbar-hide">
+      <div className="relative flex overflow-x-auto pb-2 -mx-2 scrollbar-hide force-scrollbar-hide">
         <div className="flex space-x-2 px-2">
           <AnimatePresence>
             {nextHours.map((hour, i) => {
@@ -119,7 +119,7 @@ const HourlyUpdates = ({ data, timings }) => {
                     />
                   </div>
                   
-                  <div className="text-center text-sm font-light text-white">
+                  <div className="text-center text-xs font-light text-white">
                     {Math.round(hour.temp)}{tempUnit}
                   </div>
                   
