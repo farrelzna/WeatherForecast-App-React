@@ -146,6 +146,35 @@ const App = () => {
     onIdle: handleOnIdle,
   })
 
+  const [searchQuery, setSearchQuery] = useState('')
+  const [suggestions, setSuggestions] = useState([])
+  const [showSuggestions, setShowSuggestions] = useState(false)
+
+  const handleSearchInput = async (value) => {
+    setSearchQuery(value)
+    if (value.trim().length >= 2) {
+      try {
+        const response = await axios.get(
+          `https://api.openweathermap.org/data/2.5/find?q=${value}&appid=${API_KEY}&limit=5`
+        )
+        setSuggestions(response.data.list.map(city => `${city.name}, ${city.sys.country}`))
+        setShowSuggestions(true)
+      } catch (error) {
+        setSuggestions([])
+        setShowSuggestions(false)
+      }
+    } else {
+      setSuggestions([])
+      setShowSuggestions(false)
+    }
+  }
+
+  const handleSuggestionClick = async (city) => {
+    setSearchQuery(city)
+    setShowSuggestions(false)
+    await handleSearch(city)
+  }
+
   return (
     <div className={`main-container ${bgClass} ${drawerShown ? " drawer-open" : ""}`}>
       {/* Search Bar */}
@@ -161,10 +190,13 @@ const App = () => {
             type="text"
             className="w-full py-4 px-6 bg-transparent rounded-xl text-xs text-white text-base font-light tracking-wide placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-black/2 shadow-lg transition-all duration-300 relative z-10"
             placeholder="Search location..."
+            value={searchQuery}
+            onChange={(e) => handleSearchInput(e.target.value)}
             onKeyPress={(e) => {
               if (e.key === 'Enter') {
-                handleSearch(e.target.value);
-                e.target.value = '';
+                handleSearch(searchQuery);
+                setSearchQuery('');
+                setShowSuggestions(false);
               }
             }}
             autoComplete="off"
@@ -176,6 +208,31 @@ const App = () => {
             Press Enter
           </div>
         </div>
+
+        {/* Suggestions Dropdown */}
+        <AnimatePresence>
+          {showSuggestions && suggestions.length > 0 && (
+            <motion.div
+              className="absolute w-full mt-2 bg-black/10 backdrop-blur-xl rounded-xl overflow-hidden shadow-lg z-20"
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              transition={{ duration: 0.2 }}
+            >
+              {suggestions.map((suggestion, index) => (
+                <div
+                  key={index}
+                  className="px-6 py-3 text-white/80 hover:text-white hover:bg-white/10 cursor-pointer transition-all duration-200"
+                  onClick={() => handleSuggestionClick(suggestion)}
+                >
+                  {suggestion}
+                </div>
+              ))}
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        {/* Loading State */}
         {weatherLoading && (
           <motion.div 
             className="py-3 px-6 mt-2 text-white/60 font-light text-xs tracking-wide bg-black/10 backdrop-blur-md rounded-xl shadow-lg"
